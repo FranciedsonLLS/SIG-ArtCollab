@@ -47,6 +47,7 @@ int main() {
                 printf("\nOpcao Invalida\n");
         }
     } while(opcao != 0);
+    animar_fim();
 
     return 0;
 }

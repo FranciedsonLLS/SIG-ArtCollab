@@ -2,5 +2,6 @@
 #define ANIMACAO_H
 
 void animar_menu();
+void animar_fim();
 
 #endif
