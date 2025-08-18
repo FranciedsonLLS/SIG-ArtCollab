@@ -35,7 +35,7 @@ int main() {
                 menu_main();
                 break;
             case 2:
-                
+                equipe_main();
                 break;
             case 3:
                 sobre_main();

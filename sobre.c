@@ -31,3 +31,31 @@ void sobre_main() {
     getchar(); 
     system("clear||cls");
 }
+
+void equipe_main() {
+    // LIMPAR TELA
+    system("clear||cls");
+
+    // TELA EQUIPE
+    printf("\n╔════════════════════════════════════════╗\n");
+    printf("║                                        ║\n");
+    printf("║            🌟 EQUIPE UniArt 🌟         ║\n");
+    printf("║                                        ║\n");
+    printf("╠════════════════════════════════════════╣\n");
+    printf("║ Colaboradores:                         ║\n");
+    printf("║  - Franciedson Lucas Linhares da Silva ║\n");
+    printf("║  - Mizael Franklim Gomes da Trindade   ║\n");
+    printf("║                                        ║\n");
+    printf("║ Orientador:                            ║\n");
+    printf("║  - Flavius da Luz e Gorgonio           ║\n");
+    printf("║                                        ║\n");
+    printf("║           UFRN - Campus Caicó          ║\n");
+    printf("╚════════════════════════════════════════╝\n");
+
+    printf("\nPressione ENTER para voltar ao menu principal...");
+    
+    // Captura o ENTER
+    getchar(); 
+    getchar(); 
+    system("clear||cls");
+}

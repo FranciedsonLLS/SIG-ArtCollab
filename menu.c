@@ -42,6 +42,7 @@ void menu_main() {
             break;
         case 0:
             printf("\nEncerrando\n");
+            system("clear||cls");
             break;
         default:
             printf("\nOpcao Invalida\n");
