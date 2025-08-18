@@ -4,16 +4,16 @@
 
 // Funções 
 void func1() {
-    print("FUNC1");
+    printf("FUNC1");
 }
 
 void func2() {
-    print("FUNC2");
+    printf("FUNC2");
     
 }
 
 void func3() {
-    print("FUNC3");
+    printf("FUNC3");
 }
 
 int main() {
