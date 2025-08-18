@@ -1,14 +1,14 @@
+// includes
 #include <stdio.h>
 #include <stdlib.h>
 #include "sobre.h"
 #include "menu.h"
-// Funções 
+#include "animacao.h"
 
-void func3() {
-    printf("FUNC3");
-}
 
+//MAIN
 int main() {
+    animar_menu();
     int opcao;
 
     do {
@@ -35,7 +35,7 @@ int main() {
                 menu_main();
                 break;
             case 2:
-                func3();
+                
                 break;
             case 3:
                 sobre_main();
