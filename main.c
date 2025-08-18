@@ -1,36 +1,29 @@
-
+// includes
 #include <stdio.h>
 #include <stdlib.h>
+#include "sobre.h"
+#include "menu.h"
+#include "animacao.h"
 
-// Funções 
-void func1() {
-    printf("FUNC1");
-}
 
-void func2() {
-    printf("FUNC2");
-    
-}
-
-void func3() {
-    printf("FUNC3");
-}
-
+//MAIN
 int main() {
+    animar_menu();
     int opcao;
 
     do {
         // Menu principal
         printf("\n╔════════════════════════════════════════╗\n");
         printf("║                                        ║\n");
-        printf("║         🌟 MENU PRINCIPAL 🌟           ║\n");
+        printf("║             🌟 UniArt 🌟               ║\n");
         printf("║                                        ║\n");
         printf("╠════════════════════════════════════════╣\n");
-        printf("║  [1] ➜ Func 1                          ║\n");
-        printf("║  [2] ➜ Func 2                          ║\n");
-        printf("║  [3] ➜ Func 3                          ║\n");
+        printf("║  [1] ➜ Menu                            ║\n");
+        printf("║  [2] ➜ Equipe                          ║\n");
+        printf("║  [3] ➜ Sobre                           ║\n");
         printf("║  [0] ➜ Sair                            ║\n");
         printf("╚════════════════════════════════════════╝\n");
+
         printf("Digite sua opção: ");
         scanf("%d", &opcao);
 
@@ -39,13 +32,13 @@ int main() {
 
         switch(opcao) {
             case 1:
-                func1();
+                menu_main();
                 break;
             case 2:
-                func2();
+                equipe_main();
                 break;
             case 3:
-                func3();
+                sobre_main();
                 break;
             case 0:
                 printf("\nEncerrando\n");
