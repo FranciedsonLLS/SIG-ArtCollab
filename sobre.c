@@ -59,3 +59,4 @@ void equipe_main() {
     getchar(); 
     system("clear||cls");
 }
+
