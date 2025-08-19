@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "sobre.h"
+#include "../include/sobre.h"
 
 
 void sobre_main() {

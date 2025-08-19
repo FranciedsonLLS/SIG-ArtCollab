@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.h"
+#include "../include/menu.h"
 void nada() {
     printf("NADA");
 };

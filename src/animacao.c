@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "animacao.h"
+#include "../include/animacao.h"
 
 void animar_menu(){
         system("clear||cls");

@@ -1,10 +1,9 @@
 // includes
 #include <stdio.h>
 #include <stdlib.h>
-#include "sobre.h"
-#include "menu.h"
-#include "animacao.h"
-
+#include "../include/animacao.h"
+#include "../include/sobre.h"
+#include "../include/menu.h"
 
 //MAIN
 int main() {
