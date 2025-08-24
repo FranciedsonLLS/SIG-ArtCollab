@@ -23,7 +23,7 @@ void menu_main() {
     printf("║  [3] ➜ Cadastro de Colaborador         ║\n");
     printf("║  [4] ➜ Registrar Venda                 ║\n");
     printf("║  [5] ➜ Relatórios                      ║\n");
-    printf("║  [6] ➜ ............                    ║\n");
+    printf("║  [6] ➜ Cadastro de cliente             ║\n");
     printf("║  [0] ➜ Sair                            ║\n");
     printf("╚════════════════════════════════════════╝\n");
     printf("Escolha uma opção: ");
@@ -38,6 +38,15 @@ void menu_main() {
             nada();
             break;
         case 3:
+            nada();
+            break;
+        case 4:
+            nada();
+            break;
+        case 5:
+            nada();
+            break;
+        case 6:
             nada();
             break;
         case 0:
