@@ -28,11 +28,8 @@ void menu_Main() {
     printf("║  [3] ➜ Colaboradores                   ║\n");
     printf("║  [4] ➜ Registrar Venda                 ║\n");
     printf("║  [5] ➜ Relatórios                      ║\n");
-<<<<<<< HEAD
     printf("║  [6] ➜ Cadastro de cliente             ║\n");
-=======
     printf("║----------------------------------------║\n");
->>>>>>> origin/main
     printf("║  [0] ➜ Sair                            ║\n");
     printf("╚════════════════════════════════════════╝\n");
     printf("Digite sua opção: ");
