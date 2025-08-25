@@ -2,7 +2,7 @@
 #define PRODUTOS_H
 
 // registro das funcoes de produtos
-void menu_produtos();
+void menu_Produtos();
 
 
 #endif

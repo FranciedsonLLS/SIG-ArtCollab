@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include "../include/animacao.h"
 
-void animar_menu(){
+void animar_Menu(){
         system("clear||cls");
         printf("\n╔════════════════════════════════════════╗\n");
         printf("║                                        ║\n");
@@ -284,7 +284,7 @@ void animar_menu(){
 
 }
 
-void animar_fim(){
+void animar_Fim(){
         usleep(100000);
         system("clear||cls");
         // TELA DE FIM

@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include "../include/produtos.h"
 
-void menu_produtos() {
+void menu_Produtos() {
     // LIMPAR TELA
     system("clear||cls");
 
     int opcao;
     do {
-        
+
         // MENU DE PRODUTOS
         printf("\n╔════════════════════════════════════════╗\n");
         printf("║             🛒 Menu Produtos           ║\n");

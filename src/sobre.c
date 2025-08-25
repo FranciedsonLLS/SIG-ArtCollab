@@ -4,7 +4,7 @@
 #include "../include/sobre.h"
 
 
-void sobre_main() {
+void sobre_Main() {
     //LIMPAR TELA
     system("clear||cls");
     // TELA SOBRE
@@ -32,7 +32,7 @@ void sobre_main() {
     system("clear||cls");
 }
 
-void equipe_main() {
+void equipe_Main() {
     // LIMPAR TELA
     system("clear||cls");
 
