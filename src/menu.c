@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/produtos.h"
+#include "../include/colaboradores.h"
+
 
 // FUNCAO LIXO
 void nada() {
@@ -42,7 +44,7 @@ void menu_main() {
             nada();
             break;
         case 3:
-            nada();
+            menu_colaboradores();
             break;
         case 0:
             printf("\nEncerrando\n");
