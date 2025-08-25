@@ -3,7 +3,7 @@
 #include "../include/menu.h"
 #include "../include/colaboradores.h"
 
-void menu_colaboradores() {
+void menu_Colaboradores() {
     // LIMPAR TELA
     system("clear||cls");
 

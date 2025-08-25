@@ -11,7 +11,7 @@ void nada() {
     printf("NADA");
 };
 
-void menu_main() {
+void menu_Main() {
     // LIMPAR TELA
     system("clear||cls");
 
@@ -38,13 +38,13 @@ void menu_main() {
     
     switch(opcao) {
         case 1:
-            menu_produtos();
+            menu_Produtos();
             break;
         case 2:
             nada();
             break;
         case 3:
-            menu_colaboradores();
+            menu_Colaboradores();
             break;
         case 0:
             printf("\nEncerrando\n");

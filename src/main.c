@@ -7,7 +7,7 @@
 
 //MAIN
 int main() {
-    animar_menu();
+    animar_Menu();
     int opcao;
 
     do {
@@ -31,13 +31,13 @@ int main() {
 
         switch(opcao) {
             case 1:
-                menu_main();
+                menu_Main();
                 break;
             case 2:
-                equipe_main();
+                equipe_Main();
                 break;
             case 3:
-                sobre_main();
+                sobre_Main();
                 break;
             case 0:
                 printf("\nEncerrando\n");
@@ -46,7 +46,7 @@ int main() {
                 printf("\nOpcao Invalida\n");
         }
     } while(opcao != 0);
-    animar_fim();
+    animar_Fim();
 
     return 0;
 }
