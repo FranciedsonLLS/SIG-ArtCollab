@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/menu.h"
+#include "../include/produtos.h"
+
+// FUNCAO LIXO
 void nada() {
     printf("NADA");
 };
@@ -18,21 +21,22 @@ void menu_main() {
     printf("║              🌟 UniArt 🌟              ║\n");
     printf("║                                        ║\n");
     printf("╠════════════════════════════════════════╣\n");
-    printf("║  [1] ➜ Cadastro de Produtos            ║\n");
-    printf("║  [2] ➜ Gestão de Estoque               ║\n");
-    printf("║  [3] ➜ Cadastro de Colaborador         ║\n");
+    printf("║  [1] ➜ Produtos                        ║\n");
+    printf("║  [2] ➜ Clientes                        ║\n");
+    printf("║  [3] ➜ Colaboradores                   ║\n");
     printf("║  [4] ➜ Registrar Venda                 ║\n");
     printf("║  [5] ➜ Relatórios                      ║\n");
-    printf("║  [6] ➜ ............                    ║\n");
+    printf("║----------------------------------------║\n");
     printf("║  [0] ➜ Sair                            ║\n");
     printf("╚════════════════════════════════════════╝\n");
-    printf("Escolha uma opção: ");
     printf("Digite sua opção: ");
     scanf("%d", &opcao);
+
+    //MENU CASES
     
     switch(opcao) {
         case 1:
-            nada();
+            menu_produtos();
             break;
         case 2:
             nada();
