@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "sobre.h": "c",
         "menu.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "colaboradores.h": "c"
     }
 }
