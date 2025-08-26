@@ -1,10 +1,11 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/produtos.h"
 #include "../include/colaboradores.h"
-
+#include "../include/vendas.h"
+#include "../include/clientes.h"
+#include "../include/funcionarios.h"
 
 // FUNCAO LIXO
 void nada() {
@@ -26,9 +27,10 @@ void menu_Main() {
     printf("║  [1] ➜ Produtos                        ║\n");
     printf("║  [2] ➜ Clientes                        ║\n");
     printf("║  [3] ➜ Colaboradores                   ║\n");
-    printf("║  [4] ➜ Registrar Venda                 ║\n");
+    printf("║  [4] ➜ Vendas                          ║\n");
     printf("║  [5] ➜ Relatórios                      ║\n");
-    printf("║  [6] ➜ Cadastro de cliente             ║\n");
+    printf("║                                        ║\n");
+    printf("║  [7] ➜ Funcionarios                    ║\n");
     printf("║----------------------------------------║\n");
     printf("║  [0] ➜ Sair                            ║\n");
     printf("╚════════════════════════════════════════╝\n");
@@ -42,20 +44,19 @@ void menu_Main() {
             menu_Produtos();
             break;
         case 2:
-            nada();
+            menu_Clientes();
             break;
         case 3:
             menu_Colaboradores();
             break;
         case 4:
-            nada();
+            menu_Vendas();
             break;
         case 5:
             nada();
             break;
-        case 6:
-            nada();
-            break;
+        case 7:
+            menu_Funcionarios();
         case 0:
             printf("\nEncerrando\n");
             system("clear||cls");
