@@ -10,8 +10,6 @@
       "externalConsole": false,
       "cwd": "/home/mizael-dev/Documentos/SIG-ArtCollab/src",
       "program": "/home/mizael-dev/Documentos/SIG-ArtCollab/src/build/Debug/outDebug",
-      "cwd": "/home/mizael-dev/Documentos/SIG-ArtCollab/src/src",
-      "program": "/home/mizael-dev/Documentos/SIG-ArtCollab/src/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
