@@ -18,5 +18,6 @@ typedef struct {
 //funcoes clientes
 void cadastrarCliente();
 void listarClientes();
+void excluirCliente();
 
 #endif
