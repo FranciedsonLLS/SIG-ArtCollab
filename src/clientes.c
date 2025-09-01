@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
-#define ARQUIVO_CLIENTES "clientes.txt"
+#define ARQUIVO_CLIENTES "dados/clientes.txt"
 
 // GERA ID COM BASE NO TAMANHO DO txt
 int gerarId() {
@@ -28,6 +28,7 @@ void cadastrarCliente() {
     fgets(c.nome, sizeof(c.nome), stdin);
     c.nome[strcspn(c.nome, "\n")] = 0;
 
+    //criar modulo de veriicacao dps para telefone cpf e email
     printf("Digite o CPF (formato 000.000.000-00): ");
     fgets(c.cpf, sizeof(c.cpf), stdin);
     c.cpf[strcspn(c.cpf, "\n")] = 0;
