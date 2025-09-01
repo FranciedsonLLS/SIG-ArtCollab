@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
-#define ARQUIVO_CLIENTES "dados/clientes.txt"
+#define ARQUIVO_CLIENTES "dados/clientes.txt" // constante do local de dados de clientes
 
 // GERA ID COM BASE NO TAMANHO DO txt
 int gerarId() {
