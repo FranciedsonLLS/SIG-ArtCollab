@@ -2,7 +2,82 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
+#define ARQUIVO_CLIENTES "clientes.txt"
 
+// GERA ID COM BASE NO TAMANHO DO txt
+int gerarId() {
+    FILE *file = fopen(ARQUIVO_CLIENTES, "r");
+    if (!file) return 1; // se ainda n existir vai comecar do 1
+
+    int id = 0;
+    char linha[256];
+    while (fgets(linha, sizeof(linha), file)) {
+        id++;
+    }
+    fclose(file);
+    return id + 1;
+}
+
+// CADASTRO CLIENTE
+void cadastrarCliente() {
+    Cliente c;
+    c.id = gerarId();
+
+    printf("\nDigite o nome: ");
+    while(getchar() != '\n'); // limpa buffer
+    fgets(c.nome, sizeof(c.nome), stdin);
+    c.nome[strcspn(c.nome, "\n")] = 0;
+
+    printf("Digite o CPF (formato 000.000.000-00): ");
+    fgets(c.cpf, sizeof(c.cpf), stdin);
+    c.cpf[strcspn(c.cpf, "\n")] = 0;
+
+    printf("Digite o telefone: ");
+    fgets(c.telefone, sizeof(c.telefone), stdin);
+    c.telefone[strcspn(c.telefone, "\n")] = 0;
+
+    printf("Digite o email: ");
+    fgets(c.email, sizeof(c.email), stdin);
+    c.email[strcspn(c.email, "\n")] = 0;
+
+    FILE *file = fopen(ARQUIVO_CLIENTES, "a");
+    if (!file) {
+        printf("\nErro ao abrir o arquivo!\n");
+        return;
+    }
+
+    fprintf(file, "%d;%s;%s;%s;%s\n", c.id, c.nome, c.cpf, c.telefone, c.email);
+    fclose(file);
+
+    printf("\n✅ Cliente cadastrado com sucesso!\n");
+}
+
+
+// LISTAR CLIENTES
+void listarClientes() {
+    FILE *file = fopen(ARQUIVO_CLIENTES, "r");
+    if (!file) {
+        printf("\nNenhum cliente cadastrado ainda.\n");
+        return;
+    }
+
+    char linha[256];
+    printf("\n📋 Lista de Clientes:\n");
+    printf("ID | Nome | CPF | Telefone | Email\n");
+    printf("--------------------------------------------------------------\n");
+
+    while (fgets(linha, sizeof(linha), file)) {
+        int id;
+        char nome[100], cpf[15], telefone[20], email[100];
+        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]", &id, nome, cpf, telefone, email);
+        printf("%d | %s | %s | %s | %s\n", id, nome, cpf, telefone, email);
+    }
+
+    fclose(file);
+}
+
+
+// MENU CLIENTES
 void menu_Clientes() {
     // LIMPAR TELA
     system("clear||cls");
@@ -26,10 +101,10 @@ void menu_Clientes() {
         // CASES DO MENU (SEM FUNCIONALIDADE AINDA)
         switch(opcao) {
             case 1:
-                printf("\nOpção 1 selecionada: Cadastrar cliente\n");
+                cadastrarCliente();
                 break;
             case 2:
-                printf("\nOpção 2 selecionada: Listar clientes\n");
+                listarClientes();
                 break;
             case 3:
                 printf("\nOpção 3 selecionada: Atualizar cliente\n");
