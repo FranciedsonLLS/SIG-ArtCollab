@@ -2,7 +2,174 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
+#define ARQUIVO_CLIENTES "dados/clientes.txt" // constante do local de dados de clientes
 
+// GERA ID COM BASE NO TAMANHO DO txt (OBS: CORRECAO DO ERRO LOGICO)
+// ANTES podia gerar um novo cliente com id de outro ja existente
+// Agora ele n leva em consideração so o tamanho do txt, leva em consideracao o maior ID encontrado
+int gerarId() {
+    FILE *file = fopen(ARQUIVO_CLIENTES, "r");
+    if (!file) return 1; // se n existe começa do 1
+
+    int maxId = 0;
+    char linha[256];
+    while (fgets(linha, sizeof(linha), file)) {
+        int id;
+        sscanf(linha, "%d;", &id); 
+        if (id > maxId) maxId = id;
+    }
+    fclose(file);
+    return maxId + 1;
+}
+
+
+// CADASTRO CLIENTE
+void cadastrarCliente() {
+    Cliente c;
+    c.id = gerarId();
+
+    printf("\nDigite o nome: ");
+    while(getchar() != '\n'); // limpa buffer
+    fgets(c.nome, sizeof(c.nome), stdin);
+    c.nome[strcspn(c.nome, "\n")] = 0;
+
+    //criar modulo de veriicacao dps para telefone cpf e email
+    printf("Digite o CPF (formato 000.000.000-00): ");
+    fgets(c.cpf, sizeof(c.cpf), stdin);
+    c.cpf[strcspn(c.cpf, "\n")] = 0;
+
+    printf("Digite o telefone: ");
+    fgets(c.telefone, sizeof(c.telefone), stdin);
+    c.telefone[strcspn(c.telefone, "\n")] = 0;
+
+    printf("Digite o email: ");
+    fgets(c.email, sizeof(c.email), stdin);
+    c.email[strcspn(c.email, "\n")] = 0;
+
+    FILE *file = fopen(ARQUIVO_CLIENTES, "a");
+    if (!file) {
+        printf("\nErro ao abrir o arquivo!\n");
+        return;
+    }
+
+    fprintf(file, "%d;%s;%s;%s;%s\n", c.id, c.nome, c.cpf, c.telefone, c.email);
+    fclose(file);
+
+    printf("\n✅ Cliente cadastrado com sucesso!\n");
+}
+
+//EXCLUIR CLIENTE
+
+void excluirCliente() {
+    FILE *file = fopen(ARQUIVO_CLIENTES, "r");
+    if (!file) {
+        printf("\nNenhum cliente cadastrado ainda.\n");
+        return;
+    }
+
+    Cliente clientes[1000];
+    int total = 0;
+    char linha[256];
+
+    // Lê todos os clientes
+    while (fgets(linha, sizeof(linha), file)) {
+        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]",
+               &clientes[total].id,
+               clientes[total].nome,
+               clientes[total].cpf,
+               clientes[total].telefone,
+               clientes[total].email);
+        total++;
+    }
+    fclose(file);
+
+    int idExcluir;
+    printf("\nDigite o ID do cliente que deseja excluir: ");
+    scanf("%d", &idExcluir);
+    getchar();
+
+    int encontrado = 0;
+    int indice = -1;
+    for (int i = 0; i < total; i++) {
+        if (clientes[i].id == idExcluir) {
+            encontrado = 1;
+            indice = i;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("\n❌ Cliente com ID %d não encontrado!\n", idExcluir);
+        return;
+    }
+
+    // Mostra os dados do cliente antes de excluir
+    printf("\n⚠️  Cliente encontrado:\n");
+    printf("ID: %d\n", clientes[indice].id);
+    printf("Nome: %s\n", clientes[indice].nome);
+    printf("CPF: %s\n", clientes[indice].cpf);
+    printf("Telefone: %s\n", clientes[indice].telefone);
+    printf("Email: %s\n", clientes[indice].email);
+
+    // add caso de confirmacao
+    char confirmar;
+    printf("\nDeseja realmente excluir este cliente? (s/n): ");
+    scanf("%c", &confirmar);
+    getchar();
+
+    if (confirmar != 's' && confirmar != 'S') {
+        printf("\n❌ Exclusão cancelada.\n");
+        return;
+    }
+
+    // Remove o cliente do array
+    for (int i = indice; i < total - 1; i++) {
+        clientes[i] = clientes[i + 1];
+    }
+    total--;
+
+    // Sobrescreve o arquivo
+    file = fopen(ARQUIVO_CLIENTES, "w");
+    for (int i = 0; i < total; i++) {
+        fprintf(file, "%d;%s;%s;%s;%s\n",
+                clientes[i].id,
+                clientes[i].nome,
+                clientes[i].cpf,
+                clientes[i].telefone,
+                clientes[i].email);
+    }
+    fclose(file);
+
+    printf("\n✅ Cliente excluído com sucesso!\n");
+}
+
+
+
+// LISTAR CLIENTES
+void listarClientes() {
+    FILE *file = fopen(ARQUIVO_CLIENTES, "r");
+    if (!file) {
+        printf("\nNenhum cliente cadastrado ainda.\n");
+        return;
+    }
+
+    char linha[256];
+    printf("\n📋 Lista de Clientes:\n");
+    printf("ID | Nome | CPF | Telefone | Email\n");
+    printf("--------------------------------------------------------------\n");
+
+    while (fgets(linha, sizeof(linha), file)) {
+        int id;
+        char nome[100], cpf[15], telefone[20], email[100];
+        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]", &id, nome, cpf, telefone, email);
+        printf("%d | %s | %s | %s | %s\n", id, nome, cpf, telefone, email);
+    }
+
+    fclose(file);
+}
+
+
+// MENU CLIENTES
 void menu_Clientes() {
     // LIMPAR TELA
     system("clear||cls");
@@ -26,16 +193,16 @@ void menu_Clientes() {
         // CASES DO MENU (SEM FUNCIONALIDADE AINDA)
         switch(opcao) {
             case 1:
-                printf("\nOpção 1 selecionada: Cadastrar cliente\n");
+                cadastrarCliente();
                 break;
             case 2:
-                printf("\nOpção 2 selecionada: Listar clientes\n");
+                listarClientes();
                 break;
             case 3:
                 printf("\nOpção 3 selecionada: Atualizar cliente\n");
                 break;
             case 4:
-                printf("\nOpção 4 selecionada: Excluir cliente\n");
+                excluirCliente();
                 break;
             case 0:
                 printf("\nVoltando ao menu principal...\n");
@@ -46,7 +213,6 @@ void menu_Clientes() {
 
         if(opcao != 0) {
             printf("\nPressione ENTER para continuar...");
-            getchar();
             getchar();
         }
 

@@ -29,8 +29,8 @@ void menu_Main() {
     printf("║  [3] ➜ Colaboradores                   ║\n");
     printf("║  [4] ➜ Vendas                          ║\n");
     printf("║  [5] ➜ Relatórios                      ║\n");
+    printf("║  [6] ➜ Funcionarios                    ║\n");
     printf("║                                        ║\n");
-    printf("║  [7] ➜ Funcionarios                    ║\n");
     printf("║----------------------------------------║\n");
     printf("║  [0] ➜ Sair                            ║\n");
     printf("╚════════════════════════════════════════╝\n");
@@ -55,7 +55,7 @@ void menu_Main() {
         case 5:
             nada();
             break;
-        case 7:
+        case 6:
             menu_Funcionarios();
         case 0:
             printf("\nEncerrando\n");
