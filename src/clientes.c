@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
-#define ARQUIVO_CLIENTES "clientes.txt" // constante do local de dados de clientes
+#define ARQUIVO_CLIENTES "dados/clientes.txt" // constante do local de dados de clientes
 
 // GERA ID COM BASE NO TAMANHO DO txt (OBS: CORRECAO DO ERRO LOGICO)
 // ANTES podia gerar um novo cliente com id de outro ja existente
@@ -86,7 +86,7 @@ void atualizarCliente() {
     int idAtualizar;
     printf("\nDigite o ID do cliente que deseja atualizar: ");
     scanf("%d", &idAtualizar);
-    getchar(); // limpa buffer
+    while(getchar() != '\n'); // limpa o buffer
 
     int encontrado = 0, indice = -1;
     for (int i = 0; i < total; i++) {
@@ -111,10 +111,9 @@ void atualizarCliente() {
     printf("Email: %s\n", clientes[indice].email);
 
     // Confirma atualização
-    char opcao;
     printf("\nDeseja atualizar os dados deste cliente? (s/n): ");
-    scanf("%c", &opcao);
-    getchar(); // limpa buffer
+    fgets(linha, sizeof(linha), stdin);
+    char opcao = linha[0];
 
     if (opcao != 's' && opcao != 'S') {
         printf("\n❌ Atualização cancelada.\n");
@@ -169,7 +168,6 @@ void atualizarCliente() {
     fclose(file);
     printf("\n✅ Cliente atualizado com sucesso!\n");
 }
-
 
 //EXCLUIR CLIENTE
 

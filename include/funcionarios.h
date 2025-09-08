@@ -8,7 +8,7 @@ void menu_Funcionarios();
 typedef struct {
     int id;
     char nome[100];
-    char cpf[1;      
+    char cpf[16];      
     char telefone[20];
     char email[100];
     char cargo[50]
@@ -19,5 +19,6 @@ typedef struct {
 void cadastrarFuncionario();
 void listarFuncionario();
 void excluirFuncionario();
+void atualizarFuncionario();
 
 #endif

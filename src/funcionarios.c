@@ -73,8 +73,8 @@ void listarFuncionarios() {
 
     while (fgets(linha, sizeof(linha), file)) {
         int id;
-        char nome[100], cpf[15], telefone[20], email[100], cargo[50];
-        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^;];%49[^\n]",
+        char nome[100], cpf[30], telefone[20], email[100], cargo[50];
+        sscanf(linha, "%d;%99[^;];%29[^;];%19[^;];%99[^;];%49[^\n]",
                &id, nome, cpf, telefone, email, cargo);
         printf("%d | %s | %s | %s | %s | %s\n", id, nome, cpf, telefone, email, cargo);
     }
@@ -95,7 +95,7 @@ void excluirFuncionario() {
     char linha[256];
 
     while (fgets(linha, sizeof(linha), file)) {
-        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^;];%49[^\n]",
+        sscanf(linha, "%d;%99[^;];%29[^;];%19[^;];%99[^;];%49[^\n]",
                &funcionarios[total].id,
                funcionarios[total].nome,
                funcionarios[total].cpf,
@@ -177,7 +177,7 @@ void atualizarFuncionario() {
     char linha[256];
 
     while (fgets(linha, sizeof(linha), file)) {
-        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^;];%49[^\n]",
+        sscanf(linha, "%d;%99[^;];%29[^;];%19[^;];%99[^;];%49[^\n]",
                &funcionarios[total].id,
                funcionarios[total].nome,
                funcionarios[total].cpf,
