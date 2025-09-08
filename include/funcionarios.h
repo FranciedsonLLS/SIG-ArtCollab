@@ -8,7 +8,7 @@ void menu_Funcionarios();
 typedef struct {
     int id;
     char nome[100];
-    char cpf[15];      
+    char cpf[1;      
     char telefone[20];
     char email[100];
     char cargo[50]
