@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
-#define ARQUIVO_CLIENTES "dados/clientes.txt" // constante do local de dados de clientes
+#define ARQUIVO_CLIENTES "clientes.txt" // constante do local de dados de clientes
 
 // GERA ID COM BASE NO TAMANHO DO txt (OBS: CORRECAO DO ERRO LOGICO)
 // ANTES podia gerar um novo cliente com id de outro ja existente
@@ -57,6 +57,119 @@ void cadastrarCliente() {
 
     printf("\n✅ Cliente cadastrado com sucesso!\n");
 }
+
+
+// ATUALIZAR CLIENTE
+void atualizarCliente() {
+    FILE *file = fopen(ARQUIVO_CLIENTES, "r");
+    if (!file) {
+        printf("\nNenhum cliente cadastrado ainda.\n");
+        return;
+    }
+
+    Cliente clientes[1000];
+    int total = 0;
+    char linha[256];
+
+    // Lê todos os clientes do arquivo
+    while (fgets(linha, sizeof(linha), file)) {
+        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]",
+               &clientes[total].id,
+               clientes[total].nome,
+               clientes[total].cpf,
+               clientes[total].telefone,
+               clientes[total].email);
+        total++;
+    }
+    fclose(file);
+
+    int idAtualizar;
+    printf("\nDigite o ID do cliente que deseja atualizar: ");
+    scanf("%d", &idAtualizar);
+    getchar(); // limpa buffer
+
+    int encontrado = 0, indice = -1;
+    for (int i = 0; i < total; i++) {
+        if (clientes[i].id == idAtualizar) {
+            encontrado = 1;
+            indice = i;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("\n❌ Cliente com ID %d não encontrado!\n", idAtualizar);
+        return;
+    }
+
+    // Mostra os dados atuais
+    printf("\n🔎 Cliente encontrado:\n");
+    printf("ID: %d\n", clientes[indice].id);
+    printf("Nome: %s\n", clientes[indice].nome);
+    printf("CPF: %s\n", clientes[indice].cpf);
+    printf("Telefone: %s\n", clientes[indice].telefone);
+    printf("Email: %s\n", clientes[indice].email);
+
+    // Confirma atualização
+    char opcao;
+    printf("\nDeseja atualizar os dados deste cliente? (s/n): ");
+    scanf("%c", &opcao);
+    getchar(); // limpa buffer
+
+    if (opcao != 's' && opcao != 'S') {
+        printf("\n❌ Atualização cancelada.\n");
+        return;
+    }
+
+    // Solicita novos dados (opcional)
+    printf("\nDigite o novo nome (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(clientes[indice].nome, linha);
+    }
+
+    printf("Digite o novo CPF (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(clientes[indice].cpf, linha);
+    }
+
+    printf("Digite o novo telefone (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(clientes[indice].telefone, linha);
+    }
+
+    printf("Digite o novo email (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(clientes[indice].email, linha);
+    }
+
+    // Reescreve o arquivo com os dados atualizados
+    file = fopen(ARQUIVO_CLIENTES, "w");
+    if (!file) {
+        printf("\nErro ao salvar as alterações!\n");
+        return;
+    }
+
+    for (int i = 0; i < total; i++) {
+        fprintf(file, "%d;%s;%s;%s;%s\n",
+                clientes[i].id,
+                clientes[i].nome,
+                clientes[i].cpf,
+                clientes[i].telefone,
+                clientes[i].email);
+    }
+
+    fclose(file);
+    printf("\n✅ Cliente atualizado com sucesso!\n");
+}
+
 
 //EXCLUIR CLIENTE
 
@@ -199,7 +312,7 @@ void menu_Clientes() {
                 listarClientes();
                 break;
             case 3:
-                printf("\nOpção 3 selecionada: Atualizar cliente\n");
+                atualizarCliente();
                 break;
             case 4:
                 excluirCliente();

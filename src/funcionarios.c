@@ -163,6 +163,127 @@ void excluirFuncionario() {
     printf("\n✅ Funcionário excluído com sucesso!\n");
 }
 
+//atualizar funcionario
+
+void atualizarFuncionario() {
+    FILE *file = fopen(ARQUIVO_FUNCIONARIOS, "r");
+    if (!file) {
+        printf("\nNenhum funcionário cadastrado ainda.\n");
+        return;
+    }
+
+    Funcionario funcionarios[1000];
+    int total = 0;
+    char linha[256];
+
+    while (fgets(linha, sizeof(linha), file)) {
+        sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^;];%49[^\n]",
+               &funcionarios[total].id,
+               funcionarios[total].nome,
+               funcionarios[total].cpf,
+               funcionarios[total].telefone,
+               funcionarios[total].email,
+               funcionarios[total].cargo);
+        total++;
+    }
+    fclose(file);
+
+    int idAtualizar;
+    printf("\nDigite o ID do funcionário que deseja atualizar: ");
+    scanf("%d", &idAtualizar);
+    getchar();
+
+    int encontrado = 0, indice = -1;
+    for (int i = 0; i < total; i++) {
+        if (funcionarios[i].id == idAtualizar) {
+            encontrado = 1;
+            indice = i;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("\n❌ Funcionário com ID %d não encontrado!\n", idAtualizar);
+        return;
+    }
+
+    printf("\n🔎 Funcionário encontrado:\n");
+    printf("ID: %d\n", funcionarios[indice].id);
+    printf("Nome: %s\n", funcionarios[indice].nome);
+    printf("CPF: %s\n", funcionarios[indice].cpf);
+    printf("Telefone: %s\n", funcionarios[indice].telefone);
+    printf("Email: %s\n", funcionarios[indice].email);
+    printf("Cargo: %s\n", funcionarios[indice].cargo);
+
+    char opcao;
+    printf("\nDeseja atualizar os dados deste funcionário? (s/n): ");
+    scanf("%c", &opcao);
+    getchar();
+
+    if (opcao != 's' && opcao != 'S') {
+        printf("\n❌ Atualização cancelada.\n");
+        return;
+    }
+
+    printf("\nDigite o novo nome (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(funcionarios[indice].nome, linha);
+    }
+
+    printf("Digite o novo CPF (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(funcionarios[indice].cpf, linha);
+    }
+
+    printf("Digite o novo telefone (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(funcionarios[indice].telefone, linha);
+    }
+
+    printf("Digite o novo email (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(funcionarios[indice].email, linha);
+    }
+
+    printf("Digite o novo cargo (deixe em branco para manter): ");
+    fgets(linha, sizeof(linha), stdin);
+    if (linha[0] != '\n') {
+        linha[strcspn(linha, "\n")] = 0;
+        strcpy(funcionarios[indice].cargo, linha);
+    }
+
+    // Reescreve o arquivo com os dados atualizados
+    file = fopen(ARQUIVO_FUNCIONARIOS, "w");
+    if (!file) {
+        printf("\nErro ao salvar as alterações!\n");
+        return;
+    }
+
+    for (int i = 0; i < total; i++) {
+        fprintf(file, "%d;%s;%s;%s;%s;%s\n",
+                funcionarios[i].id,
+                funcionarios[i].nome,
+                funcionarios[i].cpf,
+                funcionarios[i].telefone,
+                funcionarios[i].email,
+                funcionarios[i].cargo);
+    }
+    fclose(file);
+
+    printf("\n✅ Funcionário atualizado com sucesso!\n");
+}
+
+
+
+
 // Menu de Funcionários
 void menu_Funcionarios() {
     system("clear||cls");
@@ -190,7 +311,7 @@ void menu_Funcionarios() {
                 listarFuncionarios();
                 break;
             case 3:
-                printf("\nFunção de atualização ainda não implementada.\n");
+                atualizarFuncionario();
                 break;
             case 4:
                 excluirFuncionario();
