@@ -10,3 +10,23 @@ Um Sistema de Gestão de uma Loja de Artesanato Colaborativa
 
 ## 📝 Sobre
 O SIG-ArtCollab é um sistema desenvolvido para gerenciar lojas de artesanato colaborativas, facilitando o controle de produtos, clientes, vendas e colaboradores de forma simples e eficiente.
+
+---
+
+## ⚙️ Funcionalidades
+
+- Cadastro de clientes (nome, CPF, telefone, email)  
+- Cadastro de produtos (nome, preço, quantidade)  
+- Cadastro de colaboradores (nome, CPF, cargo)  
+- Consulta e listagem de registros
+
+---
+
+## 🚀 Como Executar
+
+**Pré-requisitos:** `gcc` e `make`
+
+**Compilar:**
+```bash
+make
+./exec
