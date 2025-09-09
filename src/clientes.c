@@ -28,12 +28,23 @@ int gerarId() {
 void cadastrarCliente() {
     Cliente c;
     c.id = gerarId();
-
+    int aux = 0;
     // Nome
-    printf("\nDigite o nome: ");
-    while(getchar() != '\n'); // limpa buffer
-    fgets(c.nome, sizeof(c.nome), stdin);
-    c.nome[strcspn(c.nome, "\n")] = 0;
+    do {
+        if(aux==0){
+            getchar();
+        }
+        printf("\nDigite o nome: ");
+        fgets(c.nome, sizeof(c.nome), stdin);
+        c.nome[strcspn(c.nome, "\n")] = 0; // remove \n
+        aux++;
+        if (!validarNome(c.nome)) {
+            printf("❌ Nome inválido! Use apenas letras e espaços (mínimo 2 caracteres).\n");
+        } else {
+            break; // nome válido
+        }
+    } while (aux>=0);
+
 
     // CPF
     while (1) {
