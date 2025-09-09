@@ -55,15 +55,17 @@ void cadastrarCliente() {
         if (validarCPF(c.cpf)) break;
         printf("❌ CPF inválido! Deve conter 11 dígitos.\n");
     }
-
+    aux = 0;
     // Telefone
     while (1) {
+        if(aux == 0) {getchar();} //limpando buffer
         printf("Digite o telefone: ");
         fgets(c.telefone, sizeof(c.telefone), stdin);
         c.telefone[strcspn(c.telefone, "\n")] = 0;
 
         if (validarTelefone(c.telefone)) break;
         printf("❌ Telefone inválido! Deve ter 10 ou 11 dígitos.\n");
+        aux++;
     }
 
     // Email
