@@ -14,10 +14,12 @@ O SIG-ArtCollab é um sistema desenvolvido para gerenciar lojas de artesanato co
 ---
 
 ## ⚙️ Funcionalidades
-
-- Cadastro de clientes (nome, CPF, telefone, email)  
-- Cadastro de produtos (nome, preço, quantidade)  
-- Cadastro de colaboradores (nome, CPF, cargo)  
+gestão --> CRUD
+- Gestão de clientes 
+- Gestão de produtos 
+- Gestão de colaboradores
+- Gestão de funcionários
+- Registro de vendas
 - Consulta e listagem de registros
 
 ---
