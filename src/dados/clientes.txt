@@ -1,3 +1,0 @@
-1;Mizael Franklim;13072105464;987342525;mizael321@gmail.com
-2;Mizael Franklim ;13072105464;987325245;thiagoviado@gmail.com
-3;Thiago Macena;13072105477;987325435;thiago123@gmail.com

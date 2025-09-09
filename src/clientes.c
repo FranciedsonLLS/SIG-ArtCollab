@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../include/menu.h"
 #include "../include/clientes.h"
+#include "../include/validacoes.h"
 #define ARQUIVO_CLIENTES "dados/clientes.txt" // constante do local de dados de clientes
 
 // GERA ID COM BASE NO TAMANHO DO txt (OBS: CORRECAO DO ERRO LOGICO)
@@ -22,29 +23,47 @@ int gerarId() {
     return maxId + 1;
 }
 
-
-// CADASTRO CLIENTE
+//NOTA: IMPLEMENTAR NOS PROXIMOS CADASTROS AS FUNC SIMPLES DE VALIDACOES
+//CASDASTRAR CLIENTE
 void cadastrarCliente() {
     Cliente c;
     c.id = gerarId();
 
+    // Nome
     printf("\nDigite o nome: ");
     while(getchar() != '\n'); // limpa buffer
     fgets(c.nome, sizeof(c.nome), stdin);
     c.nome[strcspn(c.nome, "\n")] = 0;
 
-    //criar modulo de veriicacao dps para telefone cpf e email
-    printf("Digite o CPF (formato 000.000.000-00): ");
-    fgets(c.cpf, sizeof(c.cpf), stdin);
-    c.cpf[strcspn(c.cpf, "\n")] = 0;
+    // CPF
+    while (1) {
+        printf("Digite o CPF (formato 000.000.000-00): ");
+        fgets(c.cpf, sizeof(c.cpf), stdin);
+        c.cpf[strcspn(c.cpf, "\n")] = 0;
 
-    printf("Digite o telefone: ");
-    fgets(c.telefone, sizeof(c.telefone), stdin);
-    c.telefone[strcspn(c.telefone, "\n")] = 0;
+        if (validarCPF(c.cpf)) break;
+        printf("❌ CPF inválido! Deve conter 11 dígitos.\n");
+    }
 
-    printf("Digite o email: ");
-    fgets(c.email, sizeof(c.email), stdin);
-    c.email[strcspn(c.email, "\n")] = 0;
+    // Telefone
+    while (1) {
+        printf("Digite o telefone: ");
+        fgets(c.telefone, sizeof(c.telefone), stdin);
+        c.telefone[strcspn(c.telefone, "\n")] = 0;
+
+        if (validarTelefone(c.telefone)) break;
+        printf("❌ Telefone inválido! Deve ter 10 ou 11 dígitos.\n");
+    }
+
+    // Email
+    while (1) {
+        printf("Digite o email: ");
+        fgets(c.email, sizeof(c.email), stdin);
+        c.email[strcspn(c.email, "\n")] = 0;
+
+        if (validarEmail(c.email)) break;
+        printf("❌ Email inválido! Exemplo: nome@dominio.com\n");
+    }
 
     FILE *file = fopen(ARQUIVO_CLIENTES, "a");
     if (!file) {
@@ -57,6 +76,8 @@ void cadastrarCliente() {
 
     printf("\n✅ Cliente cadastrado com sucesso!\n");
 }
+
+
 
 
 // ATUALIZAR CLIENTE

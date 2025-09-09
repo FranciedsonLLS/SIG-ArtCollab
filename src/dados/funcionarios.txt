@@ -1,5 +1,0 @@
-1;Mizael Franklim;13072105464;987325245;mizael123@gamil.com;gerente
-2;Mizael Franklim;13072105464;987325245;mizael123@gmail.com;diretor
-3;Thiago macena;130.721.0;54-64;;
-4;mizael;130.721.0;54-64;;
-5;mizael gomes;130.721.0;54-64;mizaellllll@gmail.com;dono
