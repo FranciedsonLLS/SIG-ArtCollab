@@ -8,38 +8,43 @@
 #include "../include/funcionarios.h"
 
 // FUNCAO LIXO
-void nada() {
+void nada()
+{
     printf("NADA");
 };
 
-void menu_Main() {
+void menu_Main()
+{
     // LIMPAR TELA
     system("clear||cls");
 
     int opcao;
-    do {
-    // MENU PRINCIPAL
-    printf("\n╔════════════════════════════════════════╗\n");
-    printf("║                                        ║\n");
-    printf("║              🌟 UniArt 🌟              ║\n");
-    printf("║                                        ║\n");
-    printf("╠════════════════════════════════════════╣\n");
-    printf("║  [1] ➜ Produtos                        ║\n");
-    printf("║  [2] ➜ Clientes                        ║\n");
-    printf("║  [3] ➜ Colaboradores                   ║\n");
-    printf("║  [4] ➜ Vendas                          ║\n");
-    printf("║  [5] ➜ Relatórios                      ║\n");
-    printf("║  [6] ➜ Funcionarios                    ║\n");
-    printf("║                                        ║\n");
-    printf("║----------------------------------------║\n");
-    printf("║  [0] ➜ Sair                            ║\n");
-    printf("╚════════════════════════════════════════╝\n");
-    printf("Digite sua opção: ");
-    scanf("%d", &opcao);
+    do
+    {
+        system("clear||cls");
+        // MENU PRINCIPAL
+        printf("\n╔════════════════════════════════════════╗\n");
+        printf("║                                        ║\n");
+        printf("║              🌟 UniArt 🌟              ║\n");
+        printf("║                                        ║\n");
+        printf("╠════════════════════════════════════════╣\n");
+        printf("║  [1] ➜ Produtos                        ║\n");
+        printf("║  [2] ➜ Clientes                        ║\n");
+        printf("║  [3] ➜ Colaboradores                   ║\n");
+        printf("║  [4] ➜ Vendas                          ║\n");
+        printf("║  [5] ➜ Relatórios                      ║\n");
+        printf("║  [6] ➜ Funcionarios                    ║\n");
+        printf("║                                        ║\n");
+        printf("║----------------------------------------║\n");
+        printf("║  [0] ➜ Sair                            ║\n");
+        printf("╚════════════════════════════════════════╝\n");
+        printf("Digite sua opção: ");
+        scanf("%d", &opcao);
 
-    //MENU CASES
-    
-    switch(opcao) {
+        // MENU CASES
+
+        switch (opcao)
+        {
         case 1:
             menu_Produtos();
             break;
@@ -65,7 +70,5 @@ void menu_Main() {
             printf("\nOpcao Invalida\n");
         }
 
-    } while(opcao != 0);
-
-    
+    } while (opcao != 0);
 }

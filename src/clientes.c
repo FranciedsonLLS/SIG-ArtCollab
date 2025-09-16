@@ -8,78 +8,97 @@
 // GERA ID COM BASE NO TAMANHO DO txt (OBS: CORRECAO DO ERRO LOGICO)
 // ANTES podia gerar um novo cliente com id de outro ja existente
 // Agora ele n leva em consideração so o tamanho do txt, leva em consideracao o maior ID encontrado
-int gerarId() {
+int gerarId()
+{
     FILE *file = fopen(ARQUIVO_CLIENTES, "r");
-    if (!file) return 1; // se n existe começa do 1
+    if (!file)
+        return 1; // se n existe começa do 1
 
     int maxId = 0;
     char linha[256];
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         int id;
-        sscanf(linha, "%d;", &id); 
-        if (id > maxId) maxId = id;
+        sscanf(linha, "%d;", &id);
+        if (id > maxId)
+            maxId = id;
     }
     fclose(file);
     return maxId + 1;
 }
 
-//NOTA: IMPLEMENTAR NOS PROXIMOS CADASTROS AS FUNC SIMPLES DE VALIDACOES
-//CASDASTRAR CLIENTE
-void cadastrarCliente() {
+// NOTA: IMPLEMENTAR NOS PROXIMOS CADASTROS AS FUNC SIMPLES DE VALIDACOES
+// CASDASTRAR CLIENTE
+void cadastrarCliente()
+{
     Cliente c;
     c.id = gerarId();
     int aux = 0;
     // Nome
-    do {
-        if(aux==0){
+    do
+    {
+        if (aux == 0)
+        {
             getchar();
         }
         printf("\nDigite o nome: ");
         fgets(c.nome, sizeof(c.nome), stdin);
         c.nome[strcspn(c.nome, "\n")] = 0; // remove \n
         aux++;
-        if (!validarNome(c.nome)) {
+        if (!validarNome(c.nome))
+        {
             printf("❌ Nome inválido! Use apenas letras e espaços (mínimo 2 caracteres).\n");
-        } else {
+        }
+        else
+        {
             break; // nome válido
         }
-    } while (aux>=0);
-
+    } while (aux >= 0);
 
     // CPF
-    while (1) {
+    while (1)
+    {
         printf("Digite o CPF (formato 000.000.000-00): ");
         fgets(c.cpf, sizeof(c.cpf), stdin);
         c.cpf[strcspn(c.cpf, "\n")] = 0;
 
-        if (validarCPF(c.cpf)) break;
+        if (validarCPF(c.cpf))
+            break;
         printf("❌ CPF inválido! Deve conter 11 dígitos.\n");
     }
     aux = 0;
     // Telefone
-    while (1) {
-        if(aux == 0) {getchar();} //limpando buffer
+    while (1)
+    {
+        if (aux == 0)
+        {
+            getchar();
+        } // limpando buffer
         printf("Digite o telefone: ");
         fgets(c.telefone, sizeof(c.telefone), stdin);
         c.telefone[strcspn(c.telefone, "\n")] = 0;
 
-        if (validarTelefone(c.telefone)) break;
+        if (validarTelefone(c.telefone))
+            break;
         printf("❌ Telefone inválido! Deve ter 10 ou 11 dígitos.\n");
         aux++;
     }
 
     // Email
-    while (1) {
+    while (1)
+    {
         printf("Digite o email: ");
         fgets(c.email, sizeof(c.email), stdin);
         c.email[strcspn(c.email, "\n")] = 0;
 
-        if (validarEmail(c.email)) break;
+        if (validarEmail(c.email))
+            break;
         printf("❌ Email inválido! Exemplo: nome@dominio.com\n");
     }
 
     FILE *file = fopen(ARQUIVO_CLIENTES, "a");
-    if (!file) {
+    if (!file)
+    {
         printf("\nErro ao abrir o arquivo!\n");
         return;
     }
@@ -90,13 +109,12 @@ void cadastrarCliente() {
     printf("\n✅ Cliente cadastrado com sucesso!\n");
 }
 
-
-
-
 // ATUALIZAR CLIENTE
-void atualizarCliente() {
+void atualizarCliente()
+{
     FILE *file = fopen(ARQUIVO_CLIENTES, "r");
-    if (!file) {
+    if (!file)
+    {
         printf("\nNenhum cliente cadastrado ainda.\n");
         return;
     }
@@ -106,7 +124,8 @@ void atualizarCliente() {
     char linha[256];
 
     // Lê todos os clientes do arquivo
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]",
                &clientes[total].id,
                clientes[total].nome,
@@ -120,18 +139,22 @@ void atualizarCliente() {
     int idAtualizar;
     printf("\nDigite o ID do cliente que deseja atualizar: ");
     scanf("%d", &idAtualizar);
-    while(getchar() != '\n'); // limpa o buffer
+    while (getchar() != '\n')
+        ; // limpa o buffer
 
     int encontrado = 0, indice = -1;
-    for (int i = 0; i < total; i++) {
-        if (clientes[i].id == idAtualizar) {
+    for (int i = 0; i < total; i++)
+    {
+        if (clientes[i].id == idAtualizar)
+        {
             encontrado = 1;
             indice = i;
             break;
         }
     }
 
-    if (!encontrado) {
+    if (!encontrado)
+    {
         printf("\n❌ Cliente com ID %d não encontrado!\n", idAtualizar);
         return;
     }
@@ -149,7 +172,8 @@ void atualizarCliente() {
     fgets(linha, sizeof(linha), stdin);
     char opcao = linha[0];
 
-    if (opcao != 's' && opcao != 'S') {
+    if (opcao != 's' && opcao != 'S')
+    {
         printf("\n❌ Atualização cancelada.\n");
         return;
     }
@@ -157,40 +181,46 @@ void atualizarCliente() {
     // Solicita novos dados (opcional)
     printf("\nDigite o novo nome (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(clientes[indice].nome, linha);
     }
 
     printf("Digite o novo CPF (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(clientes[indice].cpf, linha);
     }
 
     printf("Digite o novo telefone (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(clientes[indice].telefone, linha);
     }
 
     printf("Digite o novo email (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(clientes[indice].email, linha);
     }
 
     // Reescreve o arquivo com os dados atualizados
     file = fopen(ARQUIVO_CLIENTES, "w");
-    if (!file) {
+    if (!file)
+    {
         printf("\nErro ao salvar as alterações!\n");
         return;
     }
 
-    for (int i = 0; i < total; i++) {
+    for (int i = 0; i < total; i++)
+    {
         fprintf(file, "%d;%s;%s;%s;%s\n",
                 clientes[i].id,
                 clientes[i].nome,
@@ -198,16 +228,24 @@ void atualizarCliente() {
                 clientes[i].telefone,
                 clientes[i].email);
     }
+    printf("\n🔎 Cliente Atualizado:\n");
+    printf("ID: %d\n", clientes[indice].id);
+    printf("Nome: %s\n", clientes[indice].nome);
+    printf("CPF: %s\n", clientes[indice].cpf);
+    printf("Telefone: %s\n", clientes[indice].telefone);
+    printf("Email: %s\n", clientes[indice].email);
 
     fclose(file);
     printf("\n✅ Cliente atualizado com sucesso!\n");
 }
 
-//EXCLUIR CLIENTE
+// EXCLUIR CLIENTE
 
-void excluirCliente() {
+void excluirCliente()
+{
     FILE *file = fopen(ARQUIVO_CLIENTES, "r");
-    if (!file) {
+    if (!file)
+    {
         printf("\nNenhum cliente cadastrado ainda.\n");
         return;
     }
@@ -217,7 +255,8 @@ void excluirCliente() {
     char linha[256];
 
     // Lê todos os clientes
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]",
                &clientes[total].id,
                clientes[total].nome,
@@ -235,15 +274,18 @@ void excluirCliente() {
 
     int encontrado = 0;
     int indice = -1;
-    for (int i = 0; i < total; i++) {
-        if (clientes[i].id == idExcluir) {
+    for (int i = 0; i < total; i++)
+    {
+        if (clientes[i].id == idExcluir)
+        {
             encontrado = 1;
             indice = i;
             break;
         }
     }
 
-    if (!encontrado) {
+    if (!encontrado)
+    {
         printf("\n❌ Cliente com ID %d não encontrado!\n", idExcluir);
         return;
     }
@@ -262,20 +304,23 @@ void excluirCliente() {
     scanf("%c", &confirmar);
     getchar();
 
-    if (confirmar != 's' && confirmar != 'S') {
+    if (confirmar != 's' && confirmar != 'S')
+    {
         printf("\n❌ Exclusão cancelada.\n");
         return;
     }
 
     // Remove o cliente do array
-    for (int i = indice; i < total - 1; i++) {
+    for (int i = indice; i < total - 1; i++)
+    {
         clientes[i] = clientes[i + 1];
     }
     total--;
 
     // Sobrescreve o arquivo
     file = fopen(ARQUIVO_CLIENTES, "w");
-    for (int i = 0; i < total; i++) {
+    for (int i = 0; i < total; i++)
+    {
         fprintf(file, "%d;%s;%s;%s;%s\n",
                 clientes[i].id,
                 clientes[i].nome,
@@ -288,12 +333,13 @@ void excluirCliente() {
     printf("\n✅ Cliente excluído com sucesso!\n");
 }
 
-
-
 // LISTAR CLIENTES
-void listarClientes() {
+void listarClientes()
+{
+    system("clear||cls");
     FILE *file = fopen(ARQUIVO_CLIENTES, "r");
-    if (!file) {
+    if (!file)
+    {
         printf("\nNenhum cliente cadastrado ainda.\n");
         return;
     }
@@ -303,7 +349,8 @@ void listarClientes() {
     printf("ID | Nome | CPF | Telefone | Email\n");
     printf("--------------------------------------------------------------\n");
 
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         int id;
         char nome[100], cpf[15], telefone[20], email[100];
         sscanf(linha, "%d;%99[^;];%14[^;];%19[^;];%99[^\n]", &id, nome, cpf, telefone, email);
@@ -311,16 +358,19 @@ void listarClientes() {
     }
 
     fclose(file);
+    getchar(); // para pausar e ver a lista completa
 }
 
-
 // MENU CLIENTES
-void menu_Clientes() {
+void menu_Clientes()
+{
     // LIMPAR TELA
     system("clear||cls");
 
     int opcao;
-    do {
+    do
+    {
+        system("clear||cls");
         // MENU DE CLIENTES
         printf("\n╔════════════════════════════════════════╗\n");
         printf("║            👥 Menu Clientes            ║\n");
@@ -336,30 +386,32 @@ void menu_Clientes() {
         scanf("%d", &opcao);
 
         // CASES DO MENU (SEM FUNCIONALIDADE AINDA)
-        switch(opcao) {
-            case 1:
-                cadastrarCliente();
-                break;
-            case 2:
-                listarClientes();
-                break;
-            case 3:
-                atualizarCliente();
-                break;
-            case 4:
-                excluirCliente();
-                break;
-            case 0:
-                printf("\nVoltando ao menu principal...\n");
-                break;
-            default:
-                printf("\n❌ Opção inválida!\n");
+        switch (opcao)
+        {
+        case 1:
+            cadastrarCliente();
+            break;
+        case 2:
+            listarClientes();
+            break;
+        case 3:
+            atualizarCliente();
+            break;
+        case 4:
+            excluirCliente();
+            break;
+        case 0:
+            printf("\nVoltando ao menu principal...\n");
+            break;
+        default:
+            printf("\n❌ Opção inválida!\n");
         }
 
-        if(opcao != 0) {
+        if (opcao != 0)
+        {
             printf("\nPressione ENTER para continuar...");
             getchar();
         }
 
-    } while(opcao != 0);
+    } while (opcao != 0);
 }
