@@ -9,11 +9,11 @@ O SIG-ArtCollab é uma aplicação desenvolvida para gerenciar lojas de artesana
 
 🧰 Funcionalidades
 
-Cadastro de Produtos
-Controle de Estoque
-Gestão de Vendas
-Cadastro de Colaboradores/Clientes
-Interface Intuitiva
+1. Cadastro de Produtos
+2. Controle de Estoque
+3. Gestão de Vendas
+4. Cadastro de Colaboradores/Clientes
+5. Interface Intuitiva
 
 ⚙️ Tecnologias Utilizadas
 
