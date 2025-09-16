@@ -153,7 +153,7 @@ void excluirProduto()
     printf("\nDigite o ID do produto que deseja excluir: ");
     scanf("%d", &id);
     getchar();
-
+    //-1 pra evitar conflito
     int indice = -1;
     for (int i = 0; i < totalProdutos; i++)
     {

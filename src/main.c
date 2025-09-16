@@ -5,12 +5,14 @@
 #include "../include/sobre.h"
 #include "../include/menu.h"
 
-//MAIN
-int main() {
+// MAIN
+int main()
+{
     animar_Menu();
-    int opcao;
+    char opcao;
 
-    do {
+    do
+    {
         // Menu principal
         printf("\n╔════════════════════════════════════════╗\n");
         printf("║                                        ║\n");
@@ -25,30 +27,28 @@ int main() {
 
         printf("Digite sua opção: ");
         scanf("%d", &opcao);
-
-        // Limpar tela 
+        // Limpar tela
         system("clear||cls");
 
-        switch(opcao) {
-            case 1:
-                menu_Main();
-                break;
-            case 2:
-                equipe_Main();
-                break;
-            case 3:
-                sobre_Main();
-                break;
-            case 0:
-                printf("\nEncerrando\n");
-                break;
-            default:
-                printf("\nOpcao Invalida\n");
+        switch (opcao)
+        {
+        case 1:
+            menu_Main();
+            break;
+        case 2:
+            equipe_Main();
+            break;
+        case 3:
+            sobre_Main();
+            break;
+        case 0:
+            printf("\nEncerrando\n");
+            break;
+        default:
+            printf("\nOpcao Invalida\n");
         }
-    } while(opcao != 0);
+    } while (opcao != 0);
     animar_Fim();
 
     return 0;
 }
-
-

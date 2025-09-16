@@ -5,28 +5,35 @@
 #define ARQUIVO_FUNCIONARIOS "dados/funcionarios.txt"
 
 // Função para gerar novo ID
-int gerarIdFuncionario() {
+// dps tranformar em func de utilidades/validacaoetc... obs
+int gerarIdFuncionario()
+{
     FILE *file = fopen(ARQUIVO_FUNCIONARIOS, "r");
-    if (!file) return 1;
+    if (!file)
+        return 1;
 
     int maxId = 0;
     char linha[256];
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         int id;
         sscanf(linha, "%d;", &id);
-        if (id > maxId) maxId = id;
+        if (id > maxId)
+            maxId = id;
     }
     fclose(file);
     return maxId + 1;
 }
 
 // Cadastrar novo funcionário
-void cadastrarFuncionario() {
+void cadastrarFuncionario()
+{
     Funcionario f;
     f.id = gerarIdFuncionario();
 
     printf("\nDigite o nome: ");
-    while(getchar() != '\n');
+    while (getchar() != '\n')
+        ;
     fgets(f.nome, sizeof(f.nome), stdin);
     f.nome[strcspn(f.nome, "\n")] = 0;
 
@@ -47,7 +54,8 @@ void cadastrarFuncionario() {
     f.cargo[strcspn(f.cargo, "\n")] = 0;
 
     FILE *file = fopen(ARQUIVO_FUNCIONARIOS, "a");
-    if (!file) {
+    if (!file)
+    {
         printf("\nErro ao abrir o arquivo!\n");
         return;
     }
@@ -59,9 +67,11 @@ void cadastrarFuncionario() {
 }
 
 // Listar funcionários
-void listarFuncionarios() {
+void listarFuncionarios()
+{
     FILE *file = fopen(ARQUIVO_FUNCIONARIOS, "r");
-    if (!file) {
+    if (!file)
+    {
         printf("\nNenhum funcionário cadastrado ainda.\n");
         return;
     }
@@ -71,7 +81,8 @@ void listarFuncionarios() {
     printf("ID | Nome | CPF | Telefone | Email | Cargo\n");
     printf("------------------------------------------------------------------\n");
 
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         int id;
         char nome[100], cpf[30], telefone[20], email[100], cargo[50];
         sscanf(linha, "%d;%99[^;];%29[^;];%19[^;];%99[^;];%49[^\n]",
@@ -83,9 +94,11 @@ void listarFuncionarios() {
 }
 
 // Excluir funcionário
-void excluirFuncionario() {
+void excluirFuncionario()
+{
     FILE *file = fopen(ARQUIVO_FUNCIONARIOS, "r");
-    if (!file) {
+    if (!file)
+    {
         printf("\nNenhum funcionário cadastrado ainda.\n");
         return;
     }
@@ -94,7 +107,8 @@ void excluirFuncionario() {
     int total = 0;
     char linha[256];
 
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         sscanf(linha, "%d;%99[^;];%29[^;];%19[^;];%99[^;];%49[^\n]",
                &funcionarios[total].id,
                funcionarios[total].nome,
@@ -112,15 +126,18 @@ void excluirFuncionario() {
     getchar();
 
     int encontrado = 0, indice = -1;
-    for (int i = 0; i < total; i++) {
-        if (funcionarios[i].id == idExcluir) {
+    for (int i = 0; i < total; i++)
+    {
+        if (funcionarios[i].id == idExcluir)
+        {
             encontrado = 1;
             indice = i;
             break;
         }
     }
 
-    if (!encontrado) {
+    if (!encontrado)
+    {
         printf("\n❌ Funcionário com ID %d não encontrado!\n", idExcluir);
         return;
     }
@@ -138,18 +155,21 @@ void excluirFuncionario() {
     scanf("%c", &confirmar);
     getchar();
 
-    if (confirmar != 's' && confirmar != 'S') {
+    if (confirmar != 's' && confirmar != 'S')
+    {
         printf("\n❌ Exclusão cancelada.\n");
         return;
     }
 
-    for (int i = indice; i < total - 1; i++) {
+    for (int i = indice; i < total - 1; i++)
+    {
         funcionarios[i] = funcionarios[i + 1];
     }
     total--;
 
     file = fopen(ARQUIVO_FUNCIONARIOS, "w");
-    for (int i = 0; i < total; i++) {
+    for (int i = 0; i < total; i++)
+    {
         fprintf(file, "%d;%s;%s;%s;%s;%s\n",
                 funcionarios[i].id,
                 funcionarios[i].nome,
@@ -163,11 +183,13 @@ void excluirFuncionario() {
     printf("\n✅ Funcionário excluído com sucesso!\n");
 }
 
-//atualizar funcionario
+// atualizar funcionario
 
-void atualizarFuncionario() {
+void atualizarFuncionario()
+{
     FILE *file = fopen(ARQUIVO_FUNCIONARIOS, "r");
-    if (!file) {
+    if (!file)
+    {
         printf("\nNenhum funcionário cadastrado ainda.\n");
         return;
     }
@@ -176,7 +198,8 @@ void atualizarFuncionario() {
     int total = 0;
     char linha[256];
 
-    while (fgets(linha, sizeof(linha), file)) {
+    while (fgets(linha, sizeof(linha), file))
+    {
         sscanf(linha, "%d;%99[^;];%29[^;];%19[^;];%99[^;];%49[^\n]",
                &funcionarios[total].id,
                funcionarios[total].nome,
@@ -194,15 +217,18 @@ void atualizarFuncionario() {
     getchar();
 
     int encontrado = 0, indice = -1;
-    for (int i = 0; i < total; i++) {
-        if (funcionarios[i].id == idAtualizar) {
+    for (int i = 0; i < total; i++)
+    {
+        if (funcionarios[i].id == idAtualizar)
+        {
             encontrado = 1;
             indice = i;
             break;
         }
     }
 
-    if (!encontrado) {
+    if (!encontrado)
+    {
         printf("\n❌ Funcionário com ID %d não encontrado!\n", idAtualizar);
         return;
     }
@@ -220,54 +246,62 @@ void atualizarFuncionario() {
     scanf("%c", &opcao);
     getchar();
 
-    if (opcao != 's' && opcao != 'S') {
+    if (opcao != 's' && opcao != 'S')
+    {
         printf("\n❌ Atualização cancelada.\n");
         return;
     }
 
     printf("\nDigite o novo nome (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(funcionarios[indice].nome, linha);
     }
 
     printf("Digite o novo CPF (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(funcionarios[indice].cpf, linha);
     }
 
     printf("Digite o novo telefone (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(funcionarios[indice].telefone, linha);
     }
 
     printf("Digite o novo email (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(funcionarios[indice].email, linha);
     }
 
     printf("Digite o novo cargo (deixe em branco para manter): ");
     fgets(linha, sizeof(linha), stdin);
-    if (linha[0] != '\n') {
+    if (linha[0] != '\n')
+    {
         linha[strcspn(linha, "\n")] = 0;
         strcpy(funcionarios[indice].cargo, linha);
     }
 
     // Reescreve o arquivo com os dados atualizados
     file = fopen(ARQUIVO_FUNCIONARIOS, "w");
-    if (!file) {
+    if (!file)
+    {
         printf("\nErro ao salvar as alterações!\n");
         return;
     }
 
-    for (int i = 0; i < total; i++) {
+    for (int i = 0; i < total; i++)
+    {
         fprintf(file, "%d;%s;%s;%s;%s;%s\n",
                 funcionarios[i].id,
                 funcionarios[i].nome,
@@ -281,17 +315,19 @@ void atualizarFuncionario() {
     printf("\n✅ Funcionário atualizado com sucesso!\n");
 }
 
-
-
-
 // Menu de Funcionários
-void menu_Funcionarios() {
+void menu_Funcionarios()
+{
     system("clear||cls");
 
     int opcao;
-    do {
+    do
+    {
+        printf("Ir para menu...");
+        getchar();
+        system("clear||cls");
         printf("\n╔════════════════════════════════════════╗\n");
-        printf("║         👨‍💼 Menu Funcionários           ║\n");
+        printf("║         👨‍💼 Menu Funcionários         ║\n");
         printf("╠════════════════════════════════════════╣\n");
         printf("║  [1] ➜ Cadastrar Funcionário           ║\n");
         printf("║  [2] ➜ Listar Funcionários             ║\n");
@@ -303,27 +339,29 @@ void menu_Funcionarios() {
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
-        switch(opcao) {
-            case 1:
-                cadastrarFuncionario();
-                break;
-            case 2:
-                listarFuncionarios();
-                break;
-            case 3:
-                atualizarFuncionario();
-                break;
-            case 4:
-                excluirFuncionario();
-                break;
-            case 0:
-                printf("\nVoltando ao menu principal...\n");
-                break;
-            default:
-                printf("\n❌ Opção inválida!\n");
+        switch (opcao)
+        {
+        case 1:
+            cadastrarFuncionario();
+            break;
+        case 2:
+            listarFuncionarios();
+            break;
+        case 3:
+            atualizarFuncionario();
+            break;
+        case 4:
+            excluirFuncionario();
+            break;
+        case 0:
+            printf("\nVoltando ao menu principal...\n");
+            break;
+        default:
+            printf("\n❌ Opção inválida!\n");
         }
 
-        if (opcao != 0) {
+        if (opcao != 0)
+        {
             printf("\nPressione ENTER para continuar...");
             getchar();
         }
