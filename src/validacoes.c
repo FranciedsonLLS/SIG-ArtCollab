@@ -1,6 +1,6 @@
 #include <string.h>
 #include <ctype.h>
-#include "validacoes.h"
+#include "../include/validacoes.h"
 
 //------------------------------------------------
 //@OPENAI FUNCOES CRIADAS VIA https://chatgpt.com/
